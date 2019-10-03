@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/mkideal/cli"
+	"github.com/sirupsen/logrus"
 )
 
 var help = cli.HelpCommand("display help information")
@@ -31,6 +32,10 @@ func NewRunner() Runner {
 }
 
 func (r runner) Run() int {
+	logrus.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp:   true,
+		TimestampFormat: "15:04:05.000",
+	})
 	if err := cli.Root(
 		interactive,
 		cli.Tree(help),

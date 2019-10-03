@@ -2,10 +2,21 @@ package interactive
 
 import (
 	survey "github.com/AlecAivazis/survey/v2"
+	"github.com/wavesoftware/serverless-installer/internal/domain/contract"
 )
 
-type scopeScreen struct {
-	screenData
+type scope struct {
+	screen
+}
+
+func newScope(answers *contract.LocationAwareAnswers) scope {
+	val := scope{
+		screen{
+			answers: answers,
+			next:    nil,
+		},
+	}
+	return val
 }
 
 const jaeger string = "Jaeger Operator"
@@ -14,7 +25,7 @@ const kiali string = "Kiali Operator"
 const istio string = "Maistra Istio Operator"
 const serverless string = "Serverless Operator"
 
-func (s scopeScreen) Display() {
+func (s scope) Display() {
 	possible := []string{
 		serverless,
 		istio,
@@ -34,11 +45,12 @@ func (s scopeScreen) Display() {
 		Default: possible,
 	}
 	survey.AskOne(prompt, &selected)
-	s.screenData.answers.Jeager.Install = contains(selected, jaeger)
-	s.screenData.answers.Elasticsearch.Install = contains(selected, elasticsearch)
-	s.screenData.answers.Kiali.Install = contains(selected, kiali)
-	s.screenData.answers.Istio.Install = contains(selected, istio)
-	s.screenData.answers.Serverless.Install = contains(selected, serverless)
+	answers := s.screen.answers.Answers
+	answers.Jeager.Install.Enabled = contains(selected, jaeger)
+	answers.Elasticsearch.Install.Enabled = contains(selected, elasticsearch)
+	answers.Kiali.Install.Enabled = contains(selected, kiali)
+	answers.Istio.Install.Enabled = contains(selected, istio)
+	answers.Serverless.Install.Enabled = contains(selected, serverless)
 }
 
 func contains(elements []string, searched string) bool {
