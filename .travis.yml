@@ -1,3 +1,17 @@
 language: go
+sudo: false
 go:
  - 1.13.x
+matrix:
+  fast_finish: true
+  include:
+    - env: GOOS="linux"
+    - env: GOOS="windows"
+    - env: GOOS="darwin"
+branches:
+  only:
+    - master
+    - develop
+    - /^v\d/
+notifications:
+  email: onchange
