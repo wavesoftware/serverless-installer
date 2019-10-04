@@ -6,6 +6,10 @@ import (
 	"github.com/wavesoftware/serverless-installer/internal/cli"
 )
 
+var exit func(int) = func(exitcode int) {
+	os.Exit(exitcode)
+}
+
 func main() {
-	os.Exit(cli.NewRunner().Run())
+	exit(cli.NewRunner().Run())
 }

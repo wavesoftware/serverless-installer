@@ -1,35 +1,40 @@
 package model
 
+// Install - should install given tool
+type Install struct {
+	Enabled bool
+}
+
 // Jeager - a struct that represents a Jeager installation options
 type Jeager struct {
-	Install bool
+	Install
 }
 
 // Elasticsearch - a struct that represents a Elastic Search installation options
 type Elasticsearch struct {
-	Install bool
+	Install
 }
 
 // Kiali - a struct that represents a Kiali installation options
 type Kiali struct {
-	Install bool
+	Install
 }
 
 // Istio - a struct that represents a Istio installation options
 type Istio struct {
-	Install bool
+	Install
 }
 
 // Serverless - a struct that represents a Serverless installation options
 type Serverless struct {
-	Install bool
+	Install
 }
 
 // Answers - a struct that represents answers
 type Answers struct {
-	Jeager        Jeager
-	Elasticsearch Elasticsearch
-	Kiali         Kiali
-	Istio         Istio
-	Serverless    Serverless
+	Jeager
+	Elasticsearch
+	Kiali
+	Istio
+	Serverless
 }

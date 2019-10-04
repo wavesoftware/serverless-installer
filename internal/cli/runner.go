@@ -1,13 +1,15 @@
 package cli
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/mkideal/cli"
+	"github.com/sirupsen/logrus"
 )
 
-var help = cli.HelpCommand("display help information")
+func help() *cli.Command {
+	return cli.HelpCommand("display help information")
+}
 
 type runner struct {
 	args []string
@@ -31,12 +33,16 @@ func NewRunner() Runner {
 }
 
 func (r runner) Run() int {
+	logrus.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp:   true,
+		TimestampFormat: "15:04:05.000",
+	})
 	if err := cli.Root(
-		interactive,
-		cli.Tree(help),
-		cli.Tree(deploy),
+		interactive(),
+		cli.Tree(help()),
+		cli.Tree(deploy()),
 	).Run(r.args[1:]); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		logrus.Error(err)
 		return 1
 	}
 	return 0

@@ -1,10 +1,10 @@
 package interactive
 
-import "github.com/wavesoftware/serverless-installer/internal/domain/model"
+import "github.com/wavesoftware/serverless-installer/internal/domain/contract"
 
-type screenData struct {
+type screen struct {
 	next    Screen
-	answers *model.Answers
+	answers *contract.LocationAwareAnswers
 }
 
 // Screen - represents a CLI screen that user sees.
@@ -13,6 +13,6 @@ type Screen interface {
 	Next() Screen
 }
 
-func (d screenData) Next() Screen {
-	return d.next
+func (s screen) Next() Screen {
+	return s.next
 }
