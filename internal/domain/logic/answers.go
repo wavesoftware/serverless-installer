@@ -4,6 +4,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	yaml "gopkg.in/yaml.v2"
 
+	"github.com/wavesoftware/serverless-installer/internal"
 	"github.com/wavesoftware/serverless-installer/internal/domain/gateway"
 	"github.com/wavesoftware/serverless-installer/internal/domain/model"
 )
@@ -18,9 +19,7 @@ func (service answersService) Save(answers model.Answers, path string) error {
 		WithField("answers", answers).
 		Debug("Saved called")
 	contents, err := yaml.Marshal(answers)
-	if err != nil {
-		return err
-	}
+	internal.CheckNil("20191004:135106", err)
 	log.
 		WithField("yaml", string(contents)).
 		Trace("Yaml")

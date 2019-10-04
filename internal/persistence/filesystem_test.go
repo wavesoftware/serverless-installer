@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
+	"github.com/stretchr/testify/assert"
 
 	"github.com/wavesoftware/serverless-installer/internal/domain/contract"
 )
@@ -14,7 +15,7 @@ import (
 func TestFilesystemWriter(t *testing.T) {
 	// given
 	tmp, err := ioutil.TempDir("", "test-filesystem-writer")
-	checkNoError(err)
+	assert.Nil(t, err)
 	defer os.RemoveAll(tmp)
 	writer := filesystemWriter{}
 	path := filepath.Join(tmp, uuid.New().String(), contract.AnswersFilename)
@@ -24,13 +25,22 @@ func TestFilesystemWriter(t *testing.T) {
 	err = writer.Write(contents, path)
 
 	// then
-	if err != nil {
-		t.Error(err)
-	}
+	assert.Nil(t, err)
 }
 
-func checkNoError(err error) {
-	if err != nil {
-		panic(err)
-	}
+func TestFilesystemWriterOnInvalidPath(t *testing.T) {
+	// given
+	writer := filesystemWriter{}
+	path := filepath.Join(
+		// invalid character in path 0x0
+		string([]byte{0x0}),
+		uuid.New().String(), contract.AnswersFilename,
+	)
+	contents := []byte("This is test")
+
+	// when
+	err := writer.Write(contents, path)
+
+	// then
+	assert.NotNil(t, err)
 }
