@@ -1,21 +1,22 @@
+---
 language: go
 sudo: false
 dist: trusty
 go:
-  - 1.13.x
+ - 1.13.x
 script:
-  - make clean binary
-  - sonar-scanner
+ - make clean binary
+ - sonar-scanner
 branches:
   only:
-  - master
-  - develop
-  - "/^v\\d/"
+   - master
+   - develop
+   - "/^v\\d/"
 notifications:
   email: onchange
 addons:
   sonarcloud:
     organization: "wavesoftware"
     token:
-			secure: "V+dI4AgutA5XbYXgXnf1pbgG49dZE34Yz5FlM5OjMNKCagMhM3C/t0bYJrM02GUw5oI29c3APgh0TbVLKQTUL/WOSMkRli2IikUaX6gJNI1ClL/AsikaCwvIWEqDUqoKMS27T1Un4ipXbeeEkjrDVbew8C1zBYEJvDQY463GiAy/kwQ/llL40wBttmy1Wflags12sjKBfxVPmmyO8BbOeu/zYca9g48EOD0xcQVGVRvZqoOP3SwXETaU0+7F2pKd3qZbjnbpH+aJL6hI+UIAQB3iv2vWTHscMczilRmPRO7vueBC1SB41X42fG1LqQJ0vkxgMSVKftatGykrmJcrNWubK2bpczRF4sf9RhdugkE3pPR5KnstHl0VVSII4IFsQnkgPTl+2PFdPW8qxdiW4p9YI1S3iYydO3POqBcksbOj+QTbkSAxy5z6DnOoVUMZnEUAIVnyP/hfzSMTr8Q8YgFdZuuZcUMzo04Fr1ZJhboOFCo6ZMx+WcOlRd56u1KVohwhQ/gu7TalbKUMfoLwsRwNaCRiXXAmum94NLHIDK50PQwnA3DJc4JznZIVqY4SllSdWjA0fCLgSGD6rU7p9XC8/7DLyrzc1hEsKgf7UYi5bxwUPZAmH6M33XM0EaKeaZaeCtD5y5ITpg2Q0H1qeJUx/0kbWT69J2H6BYPjLUA="
+      secure: "V+dI4AgutA5XbYXgXnf1pbgG49dZE34Yz5FlM5OjMNKCagMhM3C/t0bYJrM02GUw5oI29c3APgh0TbVLKQTUL/WOSMkRli2IikUaX6gJNI1ClL/AsikaCwvIWEqDUqoKMS27T1Un4ipXbeeEkjrDVbew8C1zBYEJvDQY463GiAy/kwQ/llL40wBttmy1Wflags12sjKBfxVPmmyO8BbOeu/zYca9g48EOD0xcQVGVRvZqoOP3SwXETaU0+7F2pKd3qZbjnbpH+aJL6hI+UIAQB3iv2vWTHscMczilRmPRO7vueBC1SB41X42fG1LqQJ0vkxgMSVKftatGykrmJcrNWubK2bpczRF4sf9RhdugkE3pPR5KnstHl0VVSII4IFsQnkgPTl+2PFdPW8qxdiW4p9YI1S3iYydO3POqBcksbOj+QTbkSAxy5z6DnOoVUMZnEUAIVnyP/hfzSMTr8Q8YgFdZuuZcUMzo04Fr1ZJhboOFCo6ZMx+WcOlRd56u1KVohwhQ/gu7TalbKUMfoLwsRwNaCRiXXAmum94NLHIDK50PQwnA3DJc4JznZIVqY4SllSdWjA0fCLgSGD6rU7p9XC8/7DLyrzc1hEsKgf7UYi5bxwUPZAmH6M33XM0EaKeaZaeCtD5y5ITpg2Q0H1qeJUx/0kbWT69J2H6BYPjLUA="
 
