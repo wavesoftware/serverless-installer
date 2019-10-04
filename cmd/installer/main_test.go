@@ -26,3 +26,7 @@ func TestMain(t *testing.T) {
 
 	assert.Equal(t, 0, exitcode)
 }
+
+func TestExit(t *testing.T) {
+	exit(0)
+}

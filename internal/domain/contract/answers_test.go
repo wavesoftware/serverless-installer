@@ -13,3 +13,8 @@ func TestStruct(t *testing.T) {
 	// then
 	assert.NotNil(t, answers)
 }
+
+func TestFilename(t *testing.T) {
+	// then
+	assert.NotEmpty(t, AnswersFilename)
+}

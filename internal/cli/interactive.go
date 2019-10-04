@@ -16,15 +16,17 @@ type interactiveT struct {
 	Logging
 }
 
-var interactive = &cli.Command{
-	Desc: `Installer for Openshift Serverless
-	
+func interactive() *cli.Command {
+	return &cli.Command{
+		Desc: `Installer for Openshift Serverless
+		
 Run without any options to enter interactive shell that will guide you
 through installation process and produce an answers file. That answers
 file can by applied on current Openshift cluster with deploy command.`,
 
-	Argv: func() interface{} { return new(interactiveT) },
-	Fn:   operate,
+		Argv: func() interface{} { return new(interactiveT) },
+		Fn:   operate,
+	}
 }
 
 func operate(ctx *cli.Context) error {
@@ -56,7 +58,7 @@ func save(answers contract.LocationAwareAnswers) error {
 	err := saver.Save(*answers.Answers, answers.Path)
 	if err == nil {
 		log.
-			WithField("Answers file", answers.Path).
+			WithField("Location", answers.Path).
 			Info("Answers file has been saved.")
 	}
 	return err
